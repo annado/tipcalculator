@@ -7,10 +7,12 @@
 //
 
 #import "SettingsViewController.h"
+#import "Settings.h"
 
 @interface SettingsViewController ()
-- (IBAction)onTap:(id)sender;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 
+- (IBAction)onTap:(id)sender;
 @end
 
 @implementation SettingsViewController
@@ -27,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self updateDefaultTip];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,5 +39,16 @@
 }
 
 - (IBAction)onTap:(id)sender {
+    [self setDefaultTip];
 }
+
+- (void)updateDefaultTip {
+    int defaultSelected = [Settings getTipControl];
+    self.tipControl.selectedSegmentIndex = defaultSelected;
+}
+
+- (void)setDefaultTip {
+    [Settings setTipControl:self.tipControl.selectedSegmentIndex];
+}
+
 @end

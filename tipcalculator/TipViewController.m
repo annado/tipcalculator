@@ -8,6 +8,7 @@
 
 #import "TipViewController.h"
 #import "SettingsViewController.h"
+#import "Settings.h"
 
 @interface TipViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *billTextField;
@@ -18,6 +19,7 @@
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
 - (void)onSettingsButton;
+- (void)updateDefaultTip;
 @end
 
 @implementation TipViewController
@@ -34,8 +36,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self updateDefaultTip];
     [self updateValues];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateDefaultTip];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,6 +54,11 @@
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:YES];
     [self updateValues];
+}
+
+- (void)updateDefaultTip {
+    int defaultSelected = [Settings getTipControl];
+    self.tipControl.selectedSegmentIndex = defaultSelected;
 }
 
 - (void)updateValues {

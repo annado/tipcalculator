@@ -14,13 +14,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setInteger:selected forKey:@"settings_tip_control"];
     [defaults synchronize];
-    NSLog(@"setTipControl: %i", selected);
 }
 
 + (int) getTipControl {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int intValue = [defaults integerForKey:@"settings_tip_control"];
-    NSLog(@"getTipControl: %i", intValue);
     return intValue;
 }
 
